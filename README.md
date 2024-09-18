@@ -1,4 +1,4 @@
-# Enhanced Calculator
+# Web-based calculator
 
 A fully functional web-based calculator built using **HTML**, **CSS**, and **JavaScript**. This calculator supports basic arithmetic operations and advanced functions like exponents and square roots, providing a responsive and user-friendly interface. The calculator leverages **math.js** to handle complex mathematical expressions.
 
