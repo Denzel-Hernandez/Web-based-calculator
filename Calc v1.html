@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enhanced Calculator</title>
+    <!-- Include math.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.5.0/math.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f3f5; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator {
+            width: 320px;
+            padding: 20px;
+            background-color: #ffffff; /* White background */
+            border-radius: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 90%;
+            padding: 15px;
+            font-size: 24px;
+            text-align: right;
+            margin-bottom: 20px;
+            border: none;
+            border-bottom: 2px solid #ccc;
+            background-color: #ffffff; /* White input box */
+        }
+        .button-row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .button {
+            width: 22%;
+            padding: 15px;
+            font-size: 20px;
+            margin: 1%;
+            border: none;
+            background-color: #e0e0e0; /* Light gray for buttons */
+            color: #000;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .button:hover {
+            background-color: #d5d5d5; /* Slightly darker on hover */
+        }
+        .operations {
+            background-color: #ff9500; /* Orange for operations */
+            color: #fff;
+        }
+        .operations:hover {
+            background-color: #e08900;
+        }
+        .action-btn {
+            background-color: #34c759; /* Green for action buttons */
+            color: #fff;
+        }
+        .action-btn:hover {
+            background-color: #2fa94f;
+        }
+        .action-btn-clear {
+            background-color: #ff3b30; /* Red for clear button */
+            color: #fff;
+        }
+        .action-btn-clear:hover {
+            background-color: #e23329;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" readonly>
+        
+        <!-- First row -->
+        <div class="button-row">
+            <button class="button operations" onclick="addToDisplay('(')">(</button>
+            <button class="button operations" onclick="addToDisplay(')')">)</button>
+            <button class="button operations" onclick="addToDisplay('%')">%</button>
+            <button class="button action-btn-clear" onclick="clearDisplay()">C</button>
+        </div>
+        <!-- Second row -->
+        <div class="button-row">
+            <button class="button" onclick="addToDisplay('7')">7</button>
+            <button class="button" onclick="addToDisplay('8')">8</button>
+            <button class="button" onclick="addToDisplay('9')">9</button>
+            <button class="button operations" onclick="addToDisplay('/')">÷</button>
+        </div>
+        <!-- Third row -->
+        <div class="button-row">
+            <button class="button" onclick="addToDisplay('4')">4</button>
+            <button class="button" onclick="addToDisplay('5')">5</button>
+            <button class="button" onclick="addToDisplay('6')">6</button>
+            <button class="button operations" onclick="addToDisplay('*')">×</button>
+        </div>
+        <!-- Fourth row -->
+        <div class="button-row">
+            <button class="button" onclick="addToDisplay('1')">1</button>
+            <button class="button" onclick="addToDisplay('2')">2</button>
+            <button class="button" onclick="addToDisplay('3')">3</button>
+            <button class="button operations" onclick="addToDisplay('-')">−</button>
+        </div>
+        <!-- Fifth row -->
+        <div class="button-row">
+            <button class="button" onclick="addToDisplay('0')">0</button>
+            <button class="button" onclick="addToDisplay('.')">.</button>
+            <button class="button action-btn" onclick="evaluateExpression()">=</button>
+            <button class="button operations" onclick="addToDisplay('+')">+</button>
+        </div>
+        <!-- Sixth row (Advanced functions) -->
+        <div class="button-row">
+            <button class="button operations" onclick="addToDisplay('^')">xʸ</button>
+            <button class="button operations" onclick="addToDisplay('sqrt(')">√</button>
+            <button class="button operations" onclick="addToDisplay('sin(')">sin</button>
+            <button class="button operations" onclick="addToDisplay('cos(')">cos</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to add clicked button's value to the display
+        function addToDisplay(value) {
+            document.getElementById("display").value += value;
+        }
+
+        // Clear the display
+        function clearDisplay() {
+            document.getElementById("display").value = "";
+        }
+
+        // Evaluate the expression entered in the display
+        function evaluateExpression() {
+            try {
+                let expression = document.getElementById("display").value;
+                // Replace '÷' and '×' with '/' and '*'
+                expression = expression.replace(/÷/g, '/').replace(/×/g, '*').replace(/−/g, '-').replace(/xʸ/g, '^');
+                // Evaluate using math.js
+                let result = math.evaluate(expression);
+                document.getElementById("display").value = result;
+            } catch (error) {
+                document.getElementById("display").value = "Error";
+            }
+        }
+    </script>
+</body>
+</html>
